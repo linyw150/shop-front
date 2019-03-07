@@ -10,6 +10,9 @@ export const drawCodeImage = "/xboot/common/captcha/draw/"
 // 获取菜单
 export const getMenuList = "api/shop/getMenuList"
 
+// 获取品牌列表
+export const getBrandList = "api/shop/getBrandList"
+
 
 
 // 登陆

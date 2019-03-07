@@ -6,6 +6,7 @@
     <div>
         <sidebar-menu
             :menu-list="menuList"
+            @on-change="handleChange"
         ></sidebar-menu>
     </div>
 </template>
@@ -26,6 +27,11 @@ export default {
         }
     },
     methods: {
+      handleChange(path){
+        this.$router.push({
+          name:'brand-list'
+        })
+      }
 
     }
 };
