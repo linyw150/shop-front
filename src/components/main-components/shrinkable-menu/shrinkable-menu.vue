@@ -4,10 +4,12 @@
 
 <template>
     <div>
-        <sidebar-menu
-            :menu-list="menuList"
-            @on-change="handleChange"
-        ></sidebar-menu>
+      <div>
+          <sidebar-menu
+              :menu-list="menuList"
+              @on-change="handleChange"
+          ></sidebar-menu>
+      </div>
     </div>
 </template>
 

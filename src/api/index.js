@@ -3,16 +3,19 @@ import { getRequest, postRequest, putRequest, deleteRequest, uploadFileRequest }
 
 
 
-// 文件上传接口
-export const uploadFile = "/xboot/upload/file"
-// 验证码渲染图片接口
-export const drawCodeImage = "/xboot/common/captcha/draw/"
+
+
 // 获取菜单
 export const getMenuList = "api/shop/getMenuList"
 
 // 获取品牌列表
-export const getBrandList = "api/shop/getBrandList"
+//export const getBrandList = "api/shop/getBrandList"
 
+
+// 登陆
+export const getBrandList = (params) => {
+  return postRequest('/shop/getBrandList', params)
+}
 
 
 // 登陆
