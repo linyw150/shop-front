@@ -10,8 +10,8 @@
         </div>
       </Sider>
       <Layout>
-        <Header class="main-header-con"><span style="color: white">1234</span></Header>
-        <Content :style="{padding: '0 16px 16px'}" class="single-page-con">
+        <Header class="main-header-con"style="z-index: 100"><span style="color: red">1234</span></Header>
+        <Content :style="{padding: '0 16px 16px'}" >
           <Scroll>
             <router-view :style="{margin: '16px 0'}"></router-view>
           </Scroll>
