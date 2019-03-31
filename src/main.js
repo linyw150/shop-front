@@ -15,6 +15,8 @@ import VueI18n from 'vue-i18n';
 import { getRequest, postRequest, putRequest, deleteRequest, uploadFileRequest } from '@/libs/axios'
 import { setStore, getStore, removeStore } from './libs/storage'
 //import hasPermission from './libs/hasPermission';
+import { Notice } from 'iview';
+
 
 Vue.use(VueI18n);
 Vue.use(iView);
@@ -32,9 +34,12 @@ Vue.prototype.setStore = setStore;
 Vue.prototype.getStore = getStore;
 Vue.prototype.removeStore = removeStore;
 Vue.config.productionTip = false;
+Vue.prototype.$Notice = Notice
+Vue.prototype.vm = vm
+
 
 /* eslint-disable no-new */
-new Vue({
+var vm = new Vue({
   el: '#app',
   router,
   store,

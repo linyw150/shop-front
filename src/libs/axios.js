@@ -67,7 +67,7 @@ export const getRequest = (url, params) => {
 };
 
 export const postRequest = (url, params) => {
-    let accessToken = getStore("accessToken");
+    console.log('1234')
     return axios({
         method: 'post',
         url: `${base}${url}`,
@@ -77,11 +77,11 @@ export const postRequest = (url, params) => {
             for (let it in data) {
                 ret += encodeURIComponent(it) + '=' + encodeURIComponent(data[it]) + '&';
             }
+           console.log(ret);
             return ret;
         }],
         headers: {
             'Content-Type': 'application/x-www-form-urlencoded',
-            'accessToken': accessToken
         }
     });
 };

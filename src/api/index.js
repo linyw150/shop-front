@@ -12,10 +12,16 @@ export const getMenuList = "api/shop/getMenuList"
 //export const getBrandList = "api/shop/getBrandList"
 
 
-// 登陆
+// 获取品牌列表
 export const getBrandList = (params) => {
   return postRequest('/shop/getBrandList', params)
 }
+
+// 编辑品牌列表
+export const editBrandDetail = (params) => {
+  return postRequest('/shop/editBrandDetail', params)
+}
+
 
 
 // 登陆

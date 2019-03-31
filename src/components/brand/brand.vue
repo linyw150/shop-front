@@ -18,17 +18,54 @@
             @on-page-size-change="handlePageSize"
             show-sizer></Page>
     </div>
-    <div v-show="!showList">
-      <Card>
+    <div v-show="showDetailPage">
+      <Card class="brand-card">
         <p slot="title">
           <Icon type="ios-film-outline" style="margin-right: 10px;"></Icon>详情
           <Button style="float: right" @click="hideBrandDetail">返回</Button>
         </p>
         <div>
-          <p>商品名:<span>{{brandInfo.name}}</span></p>
+          <Form :model="brandInfo">
+            <FormItem prop="user">
+              <Input type="text" v-model="brandInfo.name" placeholder="商品名">
+              </Input>
+            </FormItem>
+          </Form>
           <p>图片:</p>
           <img :src="brandInfo.pictureUrl" style="width: 300px;">
           <p>备注:<span>{{brandInfo.desc}}</span></p>
+        </div>
+      </Card>
+    </div>
+    <div v-show="showEditPage">
+      <Card class="brand-card">
+        <p slot="title">
+          <Icon type="ios-film-outline" style="margin-right: 10px;"></Icon>编辑
+          <Button style="float: right" @click="hideEditDetail">返回</Button>
+        </p>
+        <div>
+          <Form :model="brandInfo" ref="brandInfo" :rules="brandValidate">
+            <FormItem label="商品名:" prop="brandNo">
+              <Input type="text" v-model="brandInfo.name" placeholder="商品名"/>
+            </FormItem>
+            <FormItem>
+              <Upload
+                multiple=""
+                ref="upload"
+                :on-success="handleUploadSuccess"
+                :before-upload="handleUpload"
+                action="api/uploadImg">
+                <img :src="brandInfo.pictureUrl" style="width: 300px;">
+              </Upload>
+            </FormItem>
+            <FormItem label="备注:">
+              <span>{{brandInfo.desc}}</span>
+            </FormItem>
+            <FormItem>
+              <Button type="primary" @click="handleSubmit">提交</Button>
+              <Button @click="handleReset" style="margin-left: 8px">重置</Button>
+            </FormItem>
+          </Form>
         </div>
       </Card>
     </div>
@@ -38,6 +75,7 @@
 
 <script>
   import { getBrandList } from '@/api/index';
+  import { editBrandDetail } from '@/api/index';
   import axios from 'axios';
   export default {
   data () {
@@ -48,6 +86,8 @@
         keyword:'',
       },
       showList:true,
+      showDetailPage:false,
+      showEditPage:false,
       pageTotal:10, //每页总数
       pageSize: 10,//每页条数
       pageNum: 1, //初始第几页
@@ -57,6 +97,13 @@
         pictureUrl:'',
 		    desc:'',
       },
+      brandValidate:{
+        brandNo:[
+          {required:true,message: '商品号不能为空', trigger: 'blur'}
+        ]
+      },
+      file:[],
+      uploadFile:[],
       columns: [
         {
           type: 'selection',
@@ -125,7 +172,6 @@
                     on:{ click:()=>{
                       this.editBrand(params.row)
                   }
-
                 }
                 },'编辑'),
               ]);
@@ -152,10 +198,16 @@
       })
       },
       editBrand(data){
-        console.log(data);
+        this.showList = false;
+        this.showEditPage = true;
+        this.brandInfo.id=data.id;
+        this.brandInfo.pictureUrl=data.pictureUrl;
+        this.brandInfo.desc=data.desc;
+        this.brandInfo.name=data.name;
       },
       showBrandDetail(data){
         this.showList = false;
+        this.showDetailPage = true;
         this.brandInfo.id=data.id;
         this.brandInfo.pictureUrl=data.pictureUrl;
         this.brandInfo.desc=data.desc;
@@ -163,6 +215,12 @@
       },
       hideBrandDetail(){
         this.showList = !this.showList;
+        this.showDetailPage = false;
+      },
+      hideEditDetail(){
+        this.showList = !this.showList;
+        this.showEditPage = false;
+
       },
       handlePage(value){
         this.pageNum = value
@@ -172,6 +230,29 @@
       handlePageSize(value){
         this.pageSize = value;
         this.initData();
+      },
+      handleSubmit(){
+        console.log(this.brandInfo);
+        editBrandDetail(this.brandInfo).then(res=>{
+          if(res.errorcode==0){
+            let data = res.result;
+             this.initData();
+        }else {
+
+          }
+
+
+      })
+
+      },
+      handleReset(data){
+
+      },
+      handleUploadSuccess(res,file){
+        console.log(res)
+        this.brandInfo.pictureUrl = res.result;
+      },
+      handleUpload (file) {
       }
     },
     mounted(){
