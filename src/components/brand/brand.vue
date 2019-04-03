@@ -45,7 +45,7 @@
         </p>
         <div>
           <Form :model="brandInfo" ref="brandInfo" :rules="brandValidate">
-            <FormItem label="商品名:" prop="brandNo">
+            <FormItem label="商品名:" prop="name">
               <Input type="text" v-model="brandInfo.name" placeholder="商品名"/>
             </FormItem>
             <FormItem>
@@ -62,7 +62,7 @@
               <span>{{brandInfo.desc}}</span>
             </FormItem>
             <FormItem>
-              <Button type="primary" @click="handleSubmit">提交</Button>
+              <Button type="primary" @click="handleSubmit('brandInfo')">提交</Button>
               <Button @click="handleReset" style="margin-left: 8px">重置</Button>
             </FormItem>
           </Form>
@@ -77,6 +77,7 @@
   import { getBrandList } from '@/api/index';
   import { editBrandDetail } from '@/api/index';
   import axios from 'axios';
+  import { tipWarning } from '@/utils/common';
   export default {
   data () {
     return {
@@ -98,8 +99,8 @@
 		    desc:'',
       },
       brandValidate:{
-        brandNo:[
-          {required:true,message: '商品号不能为空', trigger: 'blur'}
+          name:[
+          {required:true,message:'商品号不能为空', trigger: 'blur'}
         ]
       },
       file:[],
@@ -231,18 +232,24 @@
         this.pageSize = value;
         this.initData();
       },
-      handleSubmit(){
-        console.log(this.brandInfo);
-        editBrandDetail(this.brandInfo).then(res=>{
+      handleSubmit(name){
+      console.log(this.brandInfo.name)
+      var that = this
+      that.$refs[name].validate(function(valid){
+         if(valid){
+           tipSuccess(that,'提交成功','bbb')
+         }else{
+           tipWarning(that,'操作失敗','bbb')//提示后台返回
+         }
+      })
+  /*      editBrandDetail(this.brandInfo).then(res=>{
           if(res.errorcode==0){
             let data = res.result;
              this.initData();
         }else {
 
           }
-
-
-      })
+      })*/
 
       },
       handleReset(data){

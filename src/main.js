@@ -18,9 +18,28 @@ import { setStore, getStore, removeStore } from './libs/storage'
 import { Notice } from 'iview';
 
 
+/* eslint-disable no-new */
+var vm = new Vue({
+    el: '#app',
+    router,
+    store,
+    template: '<App/>',
+    components: { App },
+    mounted() {
+    // 初始化菜单
+    console.log('aaa')
+    util.initRouter(this);
+    // 显示打开的页面的列表
+    // this.$store.commit('setOpenedList');
+    // this.$store.commit('initCachepage');
+}
+})
+
+
 Vue.use(VueI18n);
 Vue.use(iView);
 Vue.use(iviewArea);
+Vue.use(global_func);
 Vue.prototype.axios = axios;
 //Vue.use(hasPermission);
 
@@ -35,22 +54,5 @@ Vue.prototype.getStore = getStore;
 Vue.prototype.removeStore = removeStore;
 Vue.config.productionTip = false;
 Vue.prototype.$Notice = Notice
-Vue.prototype.vm = vm
 
 
-/* eslint-disable no-new */
-var vm = new Vue({
-  el: '#app',
-  router,
-  store,
-  template: '<App/>',
-  components: { App },
-  mounted() {
-    // 初始化菜单
-    console.log('aaa')
-    util.initRouter(this);
-    // 显示打开的页面的列表
-    // this.$store.commit('setOpenedList');
-    // this.$store.commit('initCachepage');
-  }
-})
