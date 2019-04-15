@@ -18,6 +18,7 @@ export const appRouter = {
   children:[
     { path: '', name: 'brand', component: () => import('@/components/HelloWorld.vue') },
     { path: '/brand-list', name: 'brand-list', component: () => import('@/components/brand/brand.vue') },
+    { path: '/manager-list', name: 'manager-list', component: () => import('@/components/manager/manager.vue') },
   ]
 };
 

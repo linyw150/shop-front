@@ -8,19 +8,33 @@ import { getRequest, postRequest, putRequest, deleteRequest, uploadFileRequest }
 // 获取菜单
 export const getMenuList = "api/shop/getMenuList"
 
-// 获取品牌列表
-//export const getBrandList = "api/shop/getBrandList"
-
 
 // 获取品牌列表
 export const getBrandList = (params) => {
   return postRequest('/shop/getBrandList', params)
 }
-
 // 编辑品牌列表
 export const editBrandDetail = (params) => {
   return postRequest('/shop/editBrandDetail', params)
 }
+// 编辑品牌列表
+export const getBrandDetail = (params) => {
+  return postRequest('/shop/getBrandDetail', params)
+}
+
+// 获取店长列表
+export const getManagerList = (params) => {
+  return postRequest('/shop/getManagerList', params)
+}
+// 编辑店长列表
+export const saveManager = (params) => {
+  return postRequest('/shop/editManagerDetail', params)
+}
+// 编辑店长列表
+export const getManagerDetail = (params) => {
+  return postRequest('/shop/getManagerDetail', params)
+}
+
 
 
 

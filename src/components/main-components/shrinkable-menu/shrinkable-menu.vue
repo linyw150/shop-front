@@ -31,7 +31,7 @@ export default {
     methods: {
       handleChange(path){
         this.$router.push({
-          name:'brand-list'
+          name:path
         })
       }
 

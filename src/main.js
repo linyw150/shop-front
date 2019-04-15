@@ -39,7 +39,6 @@ var vm = new Vue({
 Vue.use(VueI18n);
 Vue.use(iView);
 Vue.use(iviewArea);
-Vue.use(global_func);
 Vue.prototype.axios = axios;
 //Vue.use(hasPermission);
 

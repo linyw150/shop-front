@@ -1,3 +1,8 @@
+var com = {
+   tips:{
+     OPERATING_SUCCESS:'操作成功'
+   }
+}
 // 获取品牌列表
 export const tipWarning = (vm,msg,desc) => {
   vm.$Notice.warning({
@@ -8,7 +13,7 @@ export const tipWarning = (vm,msg,desc) => {
 }
 export const tipSuccess = (vm,msg,desc) => {
   vm.$Notice.success({
-    title: msg,
+    title: com.tips.OPERATING_SUCCESS,
     desc: "" === desc ? "" : desc,
     duration: 3
   });
