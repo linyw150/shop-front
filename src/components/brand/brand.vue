@@ -63,7 +63,7 @@
               <span>{{brandForm.desc}}</span>
             </FormItem>
             <FormItem>
-              <Button type="primary" @click="save">提交</Button>
+              <Button type="primary" @click="save('brandForm')">提交</Button>
               <Button @click="reset" style="margin-left: 8px">重置</Button>
             </FormItem>
           </Form>
@@ -247,6 +247,7 @@
       },
       save(name){
         var _this = this
+        console.log(name)
         _this.$refs[name].validate(function(valid){
          if(valid){
            var postData =_this.brandInfo

@@ -28,11 +28,19 @@ export const getManagerList = (params) => {
 }
 // 编辑店长列表
 export const saveManager = (params) => {
-  return postRequest('/shop/editManagerDetail', params)
+  return postRequest('/shop/saveManager', params)
 }
 // 编辑店长列表
-export const getManagerDetail = (params) => {
-  return postRequest('/shop/getManagerDetail', params)
+export const getManager = (params) => {
+  return postRequest('/shop/getManager', params)
+}
+// 编辑店长列表
+export const stopManager = (params) => {
+  return postRequest('/shop/stopManager', params)
+}
+// 编辑店长列表
+export const searchManager = (params) => {
+  return postRequest('/shop/searchManager', params)
 }
 
 
